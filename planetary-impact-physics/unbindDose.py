@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 #
 # unbindDose.py
-# (C) 20245 - George McGinn - MIT License
+# (C) 2025 - George McGinn - MIT License
 # Compute the upper and lower bound lunar dose from an Earth destruction impact in Grays (Gy = J/kg).
 # Build: Run in PYTHON3 environment
 #

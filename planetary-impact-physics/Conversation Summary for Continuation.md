@@ -21,7 +21,7 @@ Working on "Planetary Impact Physics Simulator" - a scientific toolkit with two 
 
 **Physics Discussions:**
 - Clarified difference between classical (impossible >c speeds) vs relativistic (approaches c) calculations
-- Calculated Moon destruction scenario: binding energy ~1.2×10²⁹ J (vs Earth's 2.49×10³² J)
+- Calculated Moon destruction scenario: binding energy ~1.2*10²⁹ J (vs Earth's 2.49*10³² J)
 - **Critical finding**: Even Moon destruction produces lethal radiation doses (~1.9 million Gy at Earth distance)
 
 **Recent Atmospheric Updates:**

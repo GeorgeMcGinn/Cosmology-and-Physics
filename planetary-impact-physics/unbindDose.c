@@ -1,38 +1,38 @@
-// unbindDose.c 
-// (C) 2025 - George McGinn - MIT License
-// Compute the upper and lower bound lunar dose from Earth destruction impact in Grays
-// Build: gcc -O2 unbindDose.c -o unbindDose -lm
-//
-// Usage:
-//   ./unbindDose [E=2.49e32] [eta=3e-3] [d=3.844e8] [A=0.7] [M=70.0] [f=1.0] [theta_deg=75.0] [atmos_trans=1.0]
-//
-// Examples:
-//   ./unbindDose
-//   ./unbindDose 2.49e32 3e-3 3.844e8 0.7 70 1 75
-//   ./unbindDose 2.49e32 3e-3 3.844e8 0.7 70 1 75 0.1
-//
-// Where:
-//  - E = total energy (J) released by Earth destruction
-//  - eta = fraction of E emitted as radiation (3e-3 is ~nuclear explosion fraction)
-//  - d = distance to Moon (m) (3.844e8 m is average Earth-Moon distance)
-//  - A = fraction of radiation absorbed by body (0.7 is typical for human tissue)
-//  - M = mass of body (kg) (70 kg is typical adult human mass)         
-//  - f = fraction of body exposed to radiation (1.0 is full exposure)
-//  - theta_deg = angle of incidence (degrees) (75 degrees is glancing blow)
-//  - atmos_trans = atmospheric transmission factor (1.0 = vacuum, 0.1 = 90% attenuation)
-//
-// Notes:        
-//  - Outputs dose in Grays (Gy = J/kg)
-//  - Upper boundary dose assumes direct overhead exposure (max exposure)
-//  - Lower boundary dose assumes angle theta_deg from vertical (glancing blow)   
-//  - This is a simplified model with basic atmospheric attenuation but does not account 
-//    for energy-dependent absorption, radiation type differences, secondary radiation, etc.
-//  - 8 Gy is a lethal dose for humans (without medical treatment)
-//  - M_PI is defined if not available in math.h 
-//  - Dose = (fluence * A * f * cos(theta)) / M
-//           where fluence = (eta * E) / (4 * pi * d^2) (J/m^2)  
-//  - cos(theta) = cosine of angle of incidence (1.0 for upper boundary, cos(theta_deg) for lower boundary)      
-// 
+/* unbindDose.c 
+* (C) 2025 - George McGinn - MIT License
+* Compute the upper and lower bound lunar dose from Earth destruction impact in Grays
+* Build: gcc -O2 unbindDose.c -o unbindDose -lm
+*
+* Usage:
+*   ./unbindDose [E=2.49e32] [eta=3e-3] [d=3.844e8] [A=0.7] [M=70.0] [f=1.0] [theta_deg=75.0] [atmos_trans=1.0]
+*
+* Examples:
+*   ./unbindDose
+*   ./unbindDose 2.49e32 3e-3 3.844e8 0.7 70 1 75
+*   ./unbindDose 2.49e32 3e-3 3.844e8 0.7 70 1 75 0.1
+*
+* Where:
+*  - E = total energy (J) released by Earth destruction
+*  - eta = fraction of E emitted as radiation (3e-3 is ~nuclear explosion fraction)
+*  - d = distance to Moon (m) (3.844e8 m is average Earth-Moon distance)
+*  - A = fraction of radiation absorbed by body (0.7 is typical for human tissue)
+*  - M = mass of body (kg) (70 kg is typical adult human mass)         
+*  - f = fraction of body exposed to radiation (1.0 is full exposure)
+*  - theta_deg = angle of incidence (degrees) (75 degrees is glancing blow)
+*  - atmos_trans = atmospheric transmission factor (1.0 = vacuum, 0.1 = 90% attenuation)
+*
+* Notes:        
+*  - Outputs dose in Grays (Gy = J/kg)
+*  - Upper boundary dose assumes direct overhead exposure (max exposure)
+*  - Lower boundary dose assumes angle theta_deg from vertical (glancing blow)   
+*  - This is a simplified model with basic atmospheric attenuation but does not account 
+*    for energy-dependent absorption, radiation type differences, secondary radiation, etc.
+*  - 8 Gy is a lethal dose for humans (without medical treatment)
+*  - M_PI is defined if not available in math.h 
+*  - Dose = (fluence * A * f * cos(theta)) / M
+*           where fluence = (eta * E) / (4 * pi * d^2) (J/m^2)  
+*  - cos(theta) = cosine of angle of incidence (1.0 for upper boundary, cos(theta_deg) for lower boundary)      
+*/ 
 
 #include <stdio.h>
 #include <stdlib.h>

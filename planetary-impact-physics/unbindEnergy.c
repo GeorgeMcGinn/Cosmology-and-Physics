@@ -1,65 +1,65 @@
-// unbindEnergy.c
-// (C) 2025 - George McGinn - MIT License
-// Compute impactor size from speed, or speed from size/mass, to meet
-// the selected planet's unbinding energy U, with full relativistic kinetic energy.
-// Build: gcc -O2 unbindEnergy.c -o unbindEnergy -lm
-//
-// Usage:
-//   Given speed -> required size (assume bulk density):
-//     ./unbindEnergy v <speed_km_s> [rho_kg_m3=3000] [epsilon=1.0] [name] [planet] [material]
-//   Given diameter -> required speed (assume bulk density):
-//     ./unbindEnergy d <diameter_km> [rho_kg_m3=3000] [epsilon=1.0] [name] [planet] [material]
-//   Given mass -> required speed:
-//     ./unbindEnergy m <mass_kg> [epsilon=1.0] [name] [planet] [material]
-
-// Examples:
-//     ./unbindEnergy m 1.2e17 0.25 "1036 Ganymed" earth stony
-//     ./unbindEnergy d 0.375 2000 0.25 "Apophis at 2000 kg/m^3" jupiter stony
-//     ./unbindEnergy m 1e9 0.25 Oumuamua mars cometary
-//     ./unbindEnergy v 30000 2000 0.25 "30,000 km/s at 2000 kg/m^3" pluto stony
-//     ./unbindEnergy d 0.375 2000 0.25 "Apophis at 2000 kg/m³" earth stony
-//     ./unbindEnergy d 0.375 2000 0.25 "Apophis at 2000 kg/m³" mars iron  
-//     ./unbindEnergy d 1.0 7800 0.25 "Iron asteroid" venus iron
-//     ./unbindEnergy d 0.1 3000 1.0 "Small asteroid" jupiter stony
-//     ./unbindEnergy d 5.0 3000 0.25 "Large comet" uranus cometary
-//     ./unbindEnergy d 10.0 7800 1.0 "Massive iron" neptune iron
-//     ./unbindEnergy d 0.01 1000 1.0 "Tiny rock" pluto stony
-//
-// Where:
-//  - mass_kg = mass of impactor (kg) (1e9 to 1e23 typical range)
-//  - diameter_km = diameter of impactor (km) (0.1 to 1000 km typical range)
-//  - speed_km_s = velocity of impactor (km/s) (must be < c = 299,792.458 km/s)
-//  - rho_kg_m3 = bulk density of impactor (kg/m^3) (3000 is typical asteroid density)
-//  - epsilon = coupling efficiency (dimensionless) (fraction of KE that unbinds planet)
-//  - name = optional object identifier (e.g., "1036 Ganymed", "Apophis")
-//  - planet = target planet (earth, mars, venus, jupiter, saturn, uranus, neptune, pluto, moon, vacuum)
-//  - material = impactor material type (stony, iron, cometary)
-//  - U = Planet's gravitational binding energy (varies by planet)
-//  - c = speed of light (299,792,458 m/s)
-//
-// Notes:
-//  - U varies by planet: Earth=2.49e32 J, Jupiter=2.06e36 J, Pluto=2.85e27 J, etc.
-//  - epsilon is coupling efficiency (fraction of KE that actually unbinds planet).
-//  - Atmospheric retention reduces effective coupling efficiency based on diameter, planet, and material
-//  - Outputs both classical and relativistic speeds for reference,
-//    but the relativistic result is the one to use at high energy.
-//  - Compares mass to Mercury and Ceres for scale context.
-//  - This model incorporates atmospheric effects and relativistic mechanics, but uses simplified assumptions for material fragmentation, energy coupling efficiency, and complex impact dynamics.
-//  - cbrt() is used for cube root (C99 and later).
-//  - M_PI is defined if not available in math.h
-//  - Classical KE = 0.5*m*v^2
-//  - Relativistic KE = (gamma-1)*m*c^2, where gamma = 1/sqrt(1-(v/c)^2)
-//  - For given KE, m = U/epsilon / KE_per_mass
-//  - For given m, v_classical = sqrt(2*U/epsilon/m)
-//  - For given m, gamma = 1 + U/epsilon/m/c^2
-//    then v_rel = c*sqrt(1-1/gamma^2)
-//  - For given diameter D and density rho, m = rho * (4/3)*pi*(D/2)^3
-//  - 1 km/s = 1000 m/s
-//  - 1 km = 1000 m
-//  - 1 AU = 1.496e11 m
-//  - Mercury mass = 3.30e23 kg
-//  - Ceres mass = 9.38e20 kg
-// 
+/* unbindEnergy.c
+* (C) 2025 - George McGinn - MIT License
+* Compute impactor size from speed, or speed from size/mass, to meet
+* the selected planet's unbinding energy U, with full relativistic kinetic energy.
+* Build: gcc -O2 unbindEnergy.c -o unbindEnergy -lm
+*
+* Usage:
+*   Given speed -> required size (assume bulk density):
+*     ./unbindEnergy v <speed_km_s> [rho_kg_m3=3000] [epsilon=1.0] [name] [planet] [material]
+*   Given diameter -> required speed (assume bulk density):
+*     ./unbindEnergy d <diameter_km> [rho_kg_m3=3000] [epsilon=1.0] [name] [planet] [material]
+*   Given mass -> required speed:
+*     ./unbindEnergy m <mass_kg> [epsilon=1.0] [name] [planet] [material]
+*
+* Examples:
+*     ./unbindEnergy m 1.2e17 0.25 "1036 Ganymed" earth stony
+*     ./unbindEnergy d 0.375 2000 0.25 "Apophis at 2000 kg/m^3" jupiter stony
+*     ./unbindEnergy m 1e9 0.25 Oumuamua mars cometary
+*     ./unbindEnergy v 30000 2000 0.25 "30,000 km/s at 2000 kg/m^3" pluto stony
+*     ./unbindEnergy d 0.375 2000 0.25 "Apophis at 2000 kg/m³" earth stony
+*     ./unbindEnergy d 0.375 2000 0.25 "Apophis at 2000 kg/m³" mars iron  
+*     ./unbindEnergy d 1.0 7800 0.25 "Iron asteroid" venus iron
+*     ./unbindEnergy d 0.1 3000 1.0 "Small asteroid" jupiter stony
+*     ./unbindEnergy d 5.0 3000 0.25 "Large comet" uranus cometary
+*     ./unbindEnergy d 10.0 7800 1.0 "Massive iron" neptune iron
+*     ./unbindEnergy d 0.01 1000 1.0 "Tiny rock" pluto stony
+*
+* Where:
+*  - mass_kg = mass of impactor (kg) (1e9 to 1e23 typical range)
+*  - diameter_km = diameter of impactor (km) (0.1 to 1000 km typical range)
+*  - speed_km_s = velocity of impactor (km/s) (must be < c = 299,792.458 km/s)
+*  - rho_kg_m3 = bulk density of impactor (kg/m^3) (3000 is typical asteroid density)
+*  - epsilon = coupling efficiency (dimensionless) (fraction of KE that unbinds planet)
+*  - name = optional object identifier (e.g., "1036 Ganymed", "Apophis")
+*  - planet = target planet (earth, mars, venus, jupiter, saturn, uranus, neptune, pluto, moon, vacuum)
+*  - material = impactor material type (stony, iron, cometary)
+*  - U = Planet's gravitational binding energy (varies by planet)
+*  - c = speed of light (299,792,458 m/s)
+*
+* Notes:
+*  - U varies by planet: Earth=2.49e32 J, Jupiter=2.06e36 J, Pluto=2.85e27 J, etc.
+*  - epsilon is coupling efficiency (fraction of KE that actually unbinds planet).
+*  - Atmospheric retention reduces effective coupling efficiency based on diameter, planet, and material
+*  - Outputs both classical and relativistic speeds for reference,
+*    but the relativistic result is the one to use at high energy.
+*  - Compares mass to Mercury and Ceres for scale context.
+*  - This model incorporates atmospheric effects and relativistic mechanics, but uses simplified assumptions for material fragmentation, energy coupling efficiency, and complex impact dynamics.
+*  - cbrt() is used for cube root (C99 and later).
+*  - M_PI is defined if not available in math.h
+*  - Classical KE = 0.5*m*v^2
+*  - Relativistic KE = (gamma-1)*m*c^2, where gamma = 1/sqrt(1-(v/c)^2)
+*  - For given KE, m = U/epsilon / KE_per_mass
+*  - For given m, v_classical = sqrt(2*U/epsilon/m)
+*  - For given m, gamma = 1 + U/epsilon/m/c^2
+*    then v_rel = c*sqrt(1-1/gamma^2)
+*  - For given diameter D and density rho, m = rho * (4/3)*pi*(D/2)^3
+*  - 1 km/s = 1000 m/s
+*  - 1 km = 1000 m
+*  - 1 AU = 1.496e11 m
+*  - Mercury mass = 3.30e23 kg
+*  - Ceres mass = 9.38e20 kg
+*/ 
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -218,7 +218,7 @@ double atmospheric_retention(double diameter_km, int planet_type, int material_t
             break;
 
         case PLANET_MOON:
-            // Moon: essentially no atmosphere (3×10^-15 Pa vs Earth's 101,325 Pa)
+            // Moon: essentially no atmosphere (3*10^-15 Pa vs Earth's 101,325 Pa)
             // Extremely thin exosphere provides virtually no protection
             if (material_type == MATERIAL_IRON) { // Iron
                 if (diameter_km < 0.001) return 0.99;     // <1m: 99% retention

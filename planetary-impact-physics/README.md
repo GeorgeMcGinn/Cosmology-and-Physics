@@ -10,7 +10,7 @@
 
 The Planetary Impact Physics Simulator is a collection of scientific computing tools designed to model the energy requirements and radiation effects of planetary-scale impact events. The software calculates the kinetic energy needed to overcome any planet's gravitational binding energy and estimates the resulting radiation dose at various distances.
 
-This toolkit implements both classical and relativistic physics models with comprehensive atmospheric modeling, providing researchers and educators with accurate simulations of extreme astrophysical scenarios across the solar system. The calculations support all major planetary bodies from Pluto (2.85×10²⁷ J) to Jupiter (2.06×10³⁶ J) with their respective gravitational binding energies.
+This toolkit implements both classical and relativistic physics models with comprehensive atmospheric modeling, providing researchers and educators with accurate simulations of extreme astrophysical scenarios across the solar system. The calculations support all major planetary bodies from Pluto (2.85*10²⁷ J) to Jupiter (2.06*10³⁶ J) with their respective gravitational binding energies.
 
 ## Features
 
@@ -47,7 +47,7 @@ This toolkit implements both classical and relativistic physics models with comp
   - Planet-specific atmospheric density effects
   - Material-dependent survival rates (iron > stony > cometary)
   - Size-dependent fragmentation thresholds
-  - Examples: Venus (53× Earth density) vs Moon (essentially vacuum)
+  - Examples: Venus (53* Earth density) vs Moon (essentially vacuum)
 
 ### Key Physics Implementation
 - Classical kinetic energy: KE = ½mv²
@@ -150,13 +150,13 @@ qb64pe -x unbindDose.bas -o unbindDose
 **Custom energy and distance:**
 ```bash
 ./unbindDose 1.0e33 0.01 3.844e8 0.7 70 1.0 60
-# 1×10³³ J total energy, 1% radiation fraction, 60° angle
+# 1*10³³ J total energy, 1% radiation fraction, 60° angle
 ```
 
 **Moon destruction with Earth atmospheric absorption:**
 ```bash
 ./unbindDose 1.23e29 3e-3 3.844e8 0.7 70 1.0 75 0.1
-# Moon's binding energy (1.23×10²⁹ J), 90% atmospheric absorption
+# Moon's binding energy (1.23*10²⁹ J), 90% atmospheric absorption
 ```
 
 **Jupiter destruction (extreme scenario):**
@@ -180,15 +180,15 @@ qb64pe -x unbindDose.bas -o unbindDose
 - `material`: Impactor material type (stony, iron, cometary)
 
 **Planetary Binding Energies:**
-- Earth: 2.49×10³² J
-- Venus: 1.57×10³² J  
-- Mars: 4.87×10³⁰ J
-- Jupiter: 2.06×10³⁶ J
-- Saturn: 2.22×10³⁵ J
-- Uranus: 1.19×10³⁴ J
-- Neptune: 1.69×10³⁴ J
-- Moon: 1.23×10²⁹ J
-- Pluto: 2.85×10²⁷ J
+- Earth: 2.49*10³² J
+- Venus: 1.57*10³² J  
+- Mars: 4.87*10³⁰ J
+- Jupiter: 2.06*10³⁶ J
+- Saturn: 2.22*10³⁵ J
+- Uranus: 1.19*10³⁴ J
+- Neptune: 1.69*10³⁴ J
+- Moon: 1.23*10²⁹ J
+- Pluto: 2.85*10²⁷ J
 
 **unbindDose Parameters:**
 - `E`: Total energy released in Joules
@@ -226,12 +226,12 @@ Dose (lower boundary, angle 75.0 deg, glancing blow) = 1.041215e+09 Gy
 
 ### Moon destruction with Earth atmospheric absorption:
 ```bash
-./unbindDose 1.23e29 3e-3 3.844e8 0.7 70 1.0 75 0.1 # Moon's binding energy (1.23×10²⁹ J), 90% atmospheric absorption
+./unbindDose 1.23e29 3e-3 3.844e8 0.7 70 1.0 75 0.1 # Moon's binding energy (1.23*10²⁹ J), 90% atmospheric absorption
 ```
 
 **Results:**
 ```text
-./unbindDose 1.23e29 3e-3 3.844e8 0.7 70 1.0 75 0.1 # Moon's binding energy (1.23×10²⁹ J), 90% atmospheric absorption
+./unbindDose 1.23e29 3e-3 3.844e8 0.7 70 1.0 75 0.1 # Moon's binding energy (1.23*10²⁹ J), 90% atmospheric absorption
 Impact Generated Radiation Dose
 -------------------------------
 
@@ -438,7 +438,7 @@ Dose (lower boundary, angle 75.0 deg, glancing blow) = 2.537921e-01 Gy
 ## Physics Validation
 
 The simulator has been validated against known scenarios:
-- **Moon destruction**: 1.23×10²⁹ J produces ~1.9M Gy at Earth distance (matches analytical calculations)
+- **Moon destruction**: 1.23*10²⁹ J produces ~1.9M Gy at Earth distance (matches analytical calculations)
 - **Relativistic effects**: Gamma factors correctly approach infinity as v→c
 - **Planetary scaling**: Binding energies follow GM²/R relationships within ~10% for uniform density models
 - **Atmospheric retention**: Earth survival rates match observational data for meteor impacts

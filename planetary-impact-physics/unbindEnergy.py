@@ -197,7 +197,7 @@ def atmospheric_retention(diameter_km, planet_type, material_type):
             return 0.98                              # >5m: 98% retention
 
     elif planet_type == PLANET_MOON:
-        # Moon: essentially no atmosphere (3×10^-15 Pa vs Earth's 101,325 Pa)
+        # Moon: essentially no atmosphere (3*10^-15 Pa vs Earth's 101,325 Pa)
         # Extremely thin exosphere provides virtually no protection
         if material_type == MATERIAL_IRON:  # Iron
             if diameter_km < 0.001: return 0.99     # <1m: 99% retention

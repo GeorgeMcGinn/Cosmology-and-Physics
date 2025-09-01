@@ -580,7 +580,7 @@ FUNCTION AtmosphericRetention (diameter_km AS DOUBLE, planet_type AS INTEGER, ma
                 AtmosphericRetention = 0.10 ' >10km: 10% retention
             END IF
         CASE 8 ' PLANET_MOON
-            ' Moon: essentially no atmosphere (3×10^-15 Pa vs Earth's 101,325 Pa)
+            ' Moon: essentially no atmosphere (3*10^-15 Pa vs Earth's 101,325 Pa)
             ' Extremely thin exosphere provides virtually no protection
             IF material_type = MATERIAL_IRON THEN ' Iron
                 IF diameter_km < 0.001 THEN AtmosphericRetention = 0.99 ' <1m: 99% retention

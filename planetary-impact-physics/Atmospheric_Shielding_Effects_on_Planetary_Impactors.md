@@ -72,7 +72,7 @@ The research provides clear guidance for when atmospheric effects can be ignored
 ### Planetary Protection Effectiveness:
 - **Earth**: Excellent protection up to 30m diameter
 - **Mars**: Minimal protection due to thin atmosphere (1.3% of Earth's density)
-- **Venus**: Extreme protection (53× denser than Earth's atmosphere)
+- **Venus**: Extreme protection (53* denser than Earth's atmosphere)
 - **Jupiter/Saturn**: Massive protection due to crushing atmospheric pressures
 
 ### Validation for Impact Energy Programs:
