@@ -5,11 +5,11 @@
 //
 // Usage:
 //   Given speed -> required size (assume bulk density):
-//     ./unbind v <speed_km_s> [rho_kg_m3=3000] [epsilon=1.0] [name] [planet] [material]
+//     ./unbindEnergy v <speed_km_s> [rho_kg_m3=3000] [epsilon=1.0] [name] [planet] [material]
 //   Given diameter -> required speed (assume bulk density):
-//     ./unbind d <diameter_km> [rho_kg_m3=3000] [epsilon=1.0] [name] [planet] [material]
+//     ./unbindEnergy d <diameter_km> [rho_kg_m3=3000] [epsilon=1.0] [name] [planet] [material]
 //   Given mass -> required speed:
-//     ./unbind m <mass_kg> [epsilon=1.0] [name] [planet] [material]
+//     ./unbindEnergy m <mass_kg> [epsilon=1.0] [name] [planet] [material]
 
 // Examples:
 //     ./unbindEnergy m 1.2e17 0.25 "1036 Ganymed" earth stony
