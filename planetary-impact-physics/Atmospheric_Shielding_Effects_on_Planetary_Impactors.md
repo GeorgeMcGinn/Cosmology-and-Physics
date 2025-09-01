@@ -1,7 +1,7 @@
 # <center>Atmospheric Shielding Effects on Planetary Impactors</center>
 
 By George McGinn
-(c)2025 - George McGinn - All Rights Reserved
+(C)2025 George McGinn - All Rights Reserved
 
 
 Planetary atmospheres act as critical shields against cosmic impacts, with their protective effectiveness varying dramatically based on atmospheric properties and impactor characteristics. For objects smaller than 25-30 meters diameter, Earth's atmosphere provides nearly complete protection, absorbing more than 90% of incoming kinetic energy through ablation and fragmentation processes ([NASA Science](#nasa-science)). However, atmospheric shielding becomes increasingly ineffective as impactor size grows, with objects exceeding 200 meters diameter delivering most of their energy to the surface regardless of atmospheric interference.
