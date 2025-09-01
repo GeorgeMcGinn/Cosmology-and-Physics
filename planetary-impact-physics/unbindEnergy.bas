@@ -94,17 +94,17 @@ TRUE = -1
 FALSE = 0
 
 ' Parse command line arguments
-DIM cmd           AS STRING
-DIM args(1 TO 25) AS STRING
-DIM arg_count     AS INTEGER
-DIM object_name   AS STRING
-DIM planet_name   AS STRING
-DIM material_name AS STRING
-DIM has_object    AS INTEGER
+DIM cmd             AS STRING
+DIM args(1 TO 25)   AS STRING
+DIM arg_count       AS INTEGER
+DIM object_name     AS STRING
+DIM planet_name     AS STRING
+DIM material_name   AS STRING
+DIM has_object      AS INTEGER
 DIM has_atmospheric AS INTEGER
-DIM planet_type   AS INTEGER
-DIM material_type AS INTEGER
-DIM U_binding     AS DOUBLE
+DIM planet_type     AS INTEGER
+DIM material_type   AS INTEGER
+DIM U_binding       AS DOUBLE
 
 cmd = COMMAND$
 arg_count = 0
