@@ -1,6 +1,7 @@
 $CONSOLE:ONLY
 '----------------------------------------------------------------
 ' unbindDose.bas
+' (C) 2025 - George McGinn - MIT License
 ' Compute the upper and lower bound lunar dose from Earth destruction impact in Grays
 ' Build: Run in QB64 or QB64PE environment
 ' Comile: qb64pe -x /path/to/unbindDose.bas -o /path/to/unbindDose

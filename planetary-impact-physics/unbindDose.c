@@ -1,4 +1,5 @@
 // unbindDose.c 
+// (C) 2025 - George McGinn - MIT License
 // Compute the upper and lower bound lunar dose from Earth destruction impact in Grays
 // Build: gcc -O2 unbindDose.c -o unbindDose -lm
 //

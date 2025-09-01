@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """
 unbindEnergy.py
+(C) 2025 - George McGinn - MIT License
 Compute impactor size from speed, or speed from size/mass, to meet
 the selected planet's unbinding energy U, with full relativistic kinetic energy.
 
