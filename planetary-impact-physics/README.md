@@ -74,25 +74,33 @@ This toolkit implements both classical and relativistic physics models with comp
 
 ## Installing
 
-### C Version
+
+### Downloading just the planetary impact phsyics from the GitHub repository
 ```bash
 # Clone repository (assuming main repo structure)
-git clone https://github.com/GeorgeMcGinn/Cosmology-and-Physics/planetary-impact-physics
+git clone --filter=blob:none --sparse https://github.com/GeorgeMcGinn/Cosmology-and-Physics.git
+cd Cosmology-and-Physics
+git sparse-checkout set planetary-impact-physics
 cd planetary-impact-physics
+```
 
+### Compiling 
+
+**C Version**:
+```bash
 # Compile programs
 gcc -O2 unbindEnergy.c -o unbindEnergy -lm
 gcc -O2 unbindDose.c -o unbindDose -lm
 ```
 
-### Python Version
+**Python Version**:
 ```bash
 # No compilation required - direct execution
 python3 unbindEnergy.py --help
 python3 unbindDose.py --help
 ```
 
-### QB64 Version
+**QB64 Version**:
 ```bash
 # Open in QB64/QB64PE IDE and compile, or use command line:
 qb64pe -x unbindEnergy.bas -o unbindEnergy
