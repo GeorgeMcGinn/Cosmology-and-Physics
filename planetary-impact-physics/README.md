@@ -3,6 +3,9 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT) ![](https://img.shields.io/badge/Linux-Any-informational) ![](https://img.shields.io/badge/Windows-10+-informational) ![](https://img.shields.io/badge/MacOS-Current-informational) [![Language: C](https://img.shields.io/badge/Language-C-red.svg)](https://en.wikipedia.org/wiki/C_(programming_language)) [![Language: Python](https://img.shields.io/badge/Language-Python-red.svg)](https://www.python.org/) ![Language: QB64](https://img.shields.io/badge/Language-QB64-red.svg)
 
 
+![Earth Destroyed](../images/EarthDestroyed.jpg)
+
+
 ## Introduction
 
 The Planetary Impact Physics Simulator is a collection of scientific computing tools designed to model the energy requirements and radiation effects of planetary-scale impact events. The software calculates the kinetic energy needed to overcome any planet's gravitational binding energy and estimates the resulting radiation dose at various distances.
